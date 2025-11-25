@@ -1,3 +1,5 @@
+from coffee import Coffee
+
 class Customer:
     def __init__(self, name):
         self._name = name
