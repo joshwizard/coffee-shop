@@ -1,5 +1,3 @@
-from order import Order
-
 class Coffee:
     def __init__(self, name):
         self.name = name
@@ -11,14 +9,15 @@ class Coffee:
     @name.setter
     def name(self, value):
         if not isinstance (value, str):
-            raise TypeError("Text must be of string type")
+            raise ValueError("Text must be of string type")
         
         if len(value) < 3:
-            print("Coffee name must have at least 3 characters")
+            raise ValueError("Coffee name must have at least 3 characters")
         
         self._name = value
 
     def orders(self):
+        from order import Order
         return [order for order in Order.all if order.coffee == self]
 
     def customers(self):

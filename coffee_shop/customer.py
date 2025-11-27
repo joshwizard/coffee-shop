@@ -1,6 +1,3 @@
-from coffee import Coffee
-from order import Order
-
 class Customer:
     def __init__(self, name):
         self._name = name
@@ -17,18 +14,21 @@ class Customer:
             print("Name must have a value between 1 and 15 characters")
     
     def orders(self):
+        from order import Order
         return [order for order in Order.all if order.customer == self]
 
     def coffees(self):
         return list(set(order.coffee for order in self.orders))
     
     def create_order(self, coffee, price):
+        from order import Order
         return Order(self, coffee, price)
     
     @classmethod
     def most_aficionado(cls, coffee):
         money_spent = {}
 
+        from order import Order
         for order in Order.all:
             if order.coffee == coffee:
                 if order.customer not in money_spent:
@@ -40,6 +40,3 @@ class Customer:
 
         return max(money_spent, key=money_spent.get)
     
-c1 = Customer("Josh")
-
-print(c1.name)
